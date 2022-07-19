@@ -12,3 +12,7 @@ This project was created for the IPFS ETHGlobal hackathon - https://ethglobal.co
 
 This repo contains the Smart Contract associated with this project.
 For the NodeJS API, please go to https://github.com/gaurangtorvekar/ipfs-fonts
+
+### License
+
+This project is released under the [GPL-3.0](https://www.gnu.org/licenses/gpl-3.0.txt)
