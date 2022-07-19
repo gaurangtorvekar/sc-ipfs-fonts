@@ -51,6 +51,12 @@ contract FontPayments {
             "Payment needs to be more than 0.1 Matic"
         );
 
+        Font memory selectedFont = fonts[_ipfsHash];
+
+        (bool success, ) = payable(selectedFont.creator).call{value: msg.value}(
+            ""
+        );
+        require(success, "send ether failure");
         buyers[msg.sender] = Buyer(msg.value, block.timestamp, _ipfsHash);
         emit Paid(msg.value, block.timestamp);
     }
