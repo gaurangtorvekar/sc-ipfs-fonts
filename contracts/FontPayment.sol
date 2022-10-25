@@ -3,7 +3,7 @@ pragma solidity ^0.8.9;
 
 contract FontPayments {
     uint256 public minPayment = 0.1 ether;
-    uint256 public fontCount = 0;
+    uint256 public fontCount;
 
     struct Buyer {
         uint256 amountPaid;
@@ -43,11 +43,11 @@ contract FontPayments {
         emit FontCreated(fontCount, _ipfsHash, _name, 0, _creator);
     }
 
-    event Paid(uint256 amount, uint256 when);
+    event Paid(uint256 amount, uint256 when, string font);
 
     function payment(string memory _ipfsHash) external payable {
         require(
-            msg.value > minPayment,
+            msg.value >= minPayment,
             "Payment needs to be more than 0.1 Matic"
         );
 
@@ -58,6 +58,6 @@ contract FontPayments {
         );
         require(success, "send ether failure");
         buyers[msg.sender] = Buyer(msg.value, block.timestamp, _ipfsHash);
-        emit Paid(msg.value, block.timestamp);
+        emit Paid(msg.value, block.timestamp, selectedFont.name);
     }
 }
